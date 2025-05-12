@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSocket } from "../contexts/SocketContext";
 import { useAuth } from "../contexts/AuthContext";
-import { PlayerSymbol, GameStatus, GameResult, MessageEvent, Position, Player } from "../types/gameTypes";
+import { PlayerSymbol, GameStatus, GameResult, MessageEvent, Position } from "../types/gameTypes";
 
 const GamePage = () => {
     const [newMessage, setNewMessage] = useState("");

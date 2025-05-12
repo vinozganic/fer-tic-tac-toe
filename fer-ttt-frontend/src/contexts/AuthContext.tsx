@@ -55,7 +55,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
-    const fetchUserProfile = async (authToken: string): Promise<User | null> => {
+    const fetchUserProfile = async (_authToken: string): Promise<User | null> => {
         try {
             const response = await apiService.auth.getProfile();
             const incomingUserData = response.data as IncomingUser;

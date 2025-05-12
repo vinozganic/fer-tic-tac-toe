@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, useRef, useCallback } from "react";
+import React, { createContext, useContext, useEffect, useState, useCallback } from "react";
 import { io, Socket } from "socket.io-client";
 import { useAuth } from "./AuthContext";
 import {
@@ -291,7 +291,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         }
         setError(null);
         return new Promise((resolve, reject) => {
-            const onGameStarted = (data: GameStartedEvent) => {
+            const onGameStarted = (_data: GameStartedEvent) => {
                 socket.off("game_started", onGameStarted);
                 socket.off("error", onError);
                 resolve();
@@ -318,7 +318,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         }
         setError(null);
         return new Promise((resolve, reject) => {
-            const onGameJoined = (data: GameJoinedEvent) => {
+            const onGameJoined = (_data: GameJoinedEvent) => {
                 socket.off("game_joined", onGameJoined);
                 socket.off("error", onError);
                 resolve();
@@ -353,7 +353,7 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
                     resolve();
                 }
             };
-            const onGameOver = (data: GameOverEvent) => {
+            const onGameOver = (_data: GameOverEvent) => {
                 socket.off("game_update", onGameUpdate);
                 socket.off("game_over", onGameOver);
                 socket.off("error", onError);
