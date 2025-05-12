@@ -32,12 +32,11 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         password: configService.get<string>('DB_PASSWORD', 'vinozganic'),
         database: configService.get<string>('DB_NAME', 'fer_ttt_db'),
         entities: [join(__dirname, '**', '*.entity.{ts,js}')], // Keep entity loading path
-        // synchronize: configService.get<string>('NODE_ENV') !== 'production', // Set to false in prod
-        synchronize: true,
-        // You might need SSL configuration for managed databases like Render's:
-        // ssl: configService.get<string>('NODE_ENV') === 'production'
-        //      ? { rejectUnauthorized: false } // Common setting for Render Postgres
-        //      : false,
+        synchronize: configService.get<string>('NODE_ENV') !== 'production', // false in prod!
+        ssl:
+          configService.get<string>('NODE_ENV') === 'production'
+            ? { rejectUnauthorized: false } // Needed for Render PostgreSQL connections
+            : false,
       }),
     }),
     UsersModule,
