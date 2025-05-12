@@ -264,9 +264,8 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
             });
         });
 
-        if (import.meta.env.DEV) {
-            (window as any)._socket = newSocket;
-        }
+        (window as any)._socket = newSocket;
+
         return () => {
             console.log("Cleaning up socket connection");
             newSocket.disconnect();
@@ -434,41 +433,44 @@ export const SocketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         setWinningLine(null);
     };
 
-    const contextValue = React.useMemo<SocketContextType>(() => ({
-        socket,
-        isConnected,
-        error,
-        connecting,
-        currentGame,
-        lastMove,
-        gameOver,
-        winningLine,
-        initialMessages,
-        startGame,
-        joinGame,
-        makeMove,
-        sendMessage,
-        leaveGame,
-        clearGameState,
-        clearInitialMessages,
-    }), [
-        socket,
-        isConnected,
-        error,
-        connecting,
-        currentGame,
-        lastMove,
-        gameOver,
-        winningLine,
-        initialMessages,
-        startGame,
-        joinGame,
-        makeMove,
-        sendMessage,
-        leaveGame,
-        clearGameState,
-        clearInitialMessages,
-    ]);
+    const contextValue = React.useMemo<SocketContextType>(
+        () => ({
+            socket,
+            isConnected,
+            error,
+            connecting,
+            currentGame,
+            lastMove,
+            gameOver,
+            winningLine,
+            initialMessages,
+            startGame,
+            joinGame,
+            makeMove,
+            sendMessage,
+            leaveGame,
+            clearGameState,
+            clearInitialMessages,
+        }),
+        [
+            socket,
+            isConnected,
+            error,
+            connecting,
+            currentGame,
+            lastMove,
+            gameOver,
+            winningLine,
+            initialMessages,
+            startGame,
+            joinGame,
+            makeMove,
+            sendMessage,
+            leaveGame,
+            clearGameState,
+            clearInitialMessages,
+        ]
+    );
 
     return <SocketContext.Provider value={contextValue}>{children}</SocketContext.Provider>;
 };
